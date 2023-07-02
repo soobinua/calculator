@@ -10,14 +10,17 @@ public class Calculator {
 
 //		String fileInput = inputClass.getFileInput();
 //		System.out.println("파일 내용 : " + fileInput);
-		
+
 		String input = inputClass.getInput();
 //		System.out.println("입력하신 내용 : " + input);
-		
+
 		Lexer lexer = new Lexer(input);
-		System.out.println(lexer.lex());
-		
-		
+		TokenQueue tokenQueue = lexer.lex();
+
+		while (!tokenQueue.isEmpty()) {
+			System.out.println("token : " + tokenQueue.deQueue().getLiteral());
+		}
+
 	}
 
 }

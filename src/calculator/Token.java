@@ -9,4 +9,9 @@ public class Token {
 		this.literal = literal;
 		this.tokenType = tokenType;
 	}
+
+	public String getLiteral() {
+		return literal;
+	}
+
 }
