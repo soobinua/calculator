@@ -8,11 +8,16 @@ public class Calculator {
 
 		Input inputClass = new Input();
 
-		String fileInput = inputClass.getFileInput();
-		System.out.println("파일 내용 : " + fileInput);
+//		String fileInput = inputClass.getFileInput();
+//		System.out.println("파일 내용 : " + fileInput);
 		
 		String input = inputClass.getInput();
-		System.out.println("입력하신 내용 : " + input);
+//		System.out.println("입력하신 내용 : " + input);
+		
+		Lexer lexer = new Lexer(input);
+		System.out.println(lexer.lex());
+		
+		
 	}
 
 }
