@@ -5,11 +5,9 @@ import java.util.ArrayList;
 public class TokenQueue {
 
 	private ArrayList<Token> queue;
-	private int front;
 	private int size;
 
 	public TokenQueue() {
-		front = 0;
 		size = 0;
 		queue = new ArrayList<Token>();
 	}
@@ -20,8 +18,7 @@ public class TokenQueue {
 	}
 
 	public Token deQueue() {
-		Token token = queue.get(front);
-		front++;
+		Token token = queue.remove(0);
 		size--;
 		return token;
 	}
