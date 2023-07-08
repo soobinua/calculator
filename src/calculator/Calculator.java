@@ -59,5 +59,9 @@ public class Calculator {
 
 		System.out.println("프로그램이 종료되었습니다.");
 	}
-
+	
+	// OOP 방식의 프로그램 작성하기
+	// 1. 객체 간의 메시지 전달로 프로그램 동작하게 하기
+	// 2. 중복 제거
+	// TDD 방식
 }
