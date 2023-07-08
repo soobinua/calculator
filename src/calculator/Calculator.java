@@ -12,6 +12,10 @@ public class Calculator {
 
 		//File create and write
 //		try {
+			// Java 는 Writer가 있으면 Reader가 있다.
+			// FileWriter <-> FileReader : 문자를 다룬다. ex)BufferedWriter, BufferedReader
+			// File : binary 다룬다. ex)BufferedStream
+		
 //			Files.writeString(Paths.get("xyz.txt"), "calculator", StandardCharsets.UTF_8);
 			
 			//FileWriter 이용
