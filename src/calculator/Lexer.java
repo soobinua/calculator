@@ -23,6 +23,11 @@ public class Lexer {
 		char tokenInput;
 		for (int i = 0; i <= input.length() - 1; i++) {
 			tokenInput = input.charAt(i); // charAt(index)
+			// TODO
+			// 현재 한 자릿수 토큰은 생성 가능하나 두자릿수부터 토큰 생성 불가
+			// token 생성하기 전에 다음 문자를 읽고 판단한 뒤 토큰 생성해야한다.
+			// switch문 안에서 ' '체크가 아닌 이전에 공백문자 체크 후 다음 문자 읽고 진행.
+			// tab키도 체크하지 않고 있다.
 			switch (tokenInput) {
 			case '+':
 				token = new Token(String.valueOf(tokenInput), TokenType.OPERATOR);
