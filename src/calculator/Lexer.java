@@ -21,11 +21,12 @@ public class Lexer {
 		
 		String[] inputArr = input.split(""); //구분자 "" 빈문자열
 		String tokenInput = "";
+		Token token = null;
 		for(int i = 0; i <= inputArr.length - 1; i++) {
 			tokenInput = inputArr[i];
+			token = new Token(tokenInput, TokenType.OPERAND);
+			tokenQueue.enQueue(token);
 		}
-		Token token = new Token(tokenInput, TokenType.OPERAND);
-		tokenQueue.enQueue(token);
 		return tokenQueue;
 		
 	}
