@@ -2,6 +2,7 @@ package calculator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -13,11 +14,14 @@ public class Calculator {
 	public static void main(String[] args) throws FileNotFoundException {
 
 		//File create and write
-//		try {
+		try {
 //			Files.writeString(Paths.get("xyz.txt"), "calculator", StandardCharsets.UTF_8);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+			FileWriter fw = new FileWriter("def.txt");
+			fw.write("hello fileWriter");
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		//File input
 //		File file = new File("abc.txt");
