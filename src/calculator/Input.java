@@ -1,21 +1,18 @@
 package calculator;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Input {
 
-	public String getFileInput(File file, Scanner fileScanner) throws FileNotFoundException {
-		String fileInput;
-		fileInput = fileScanner.nextLine();
-		return fileInput;
+	private Scanner scanner;
+
+	public Input(Scanner scanner) {
+		this.scanner = scanner;
 	}
 
-	public String getInput(Scanner scanner) {
-		System.out.print("> "); //prompt
-		String input = scanner.nextLine();
-		return input;
+	public String getInput() {
+		System.out.print("> "); // prompt
+		return scanner.nextLine();
 	}
 
 }
