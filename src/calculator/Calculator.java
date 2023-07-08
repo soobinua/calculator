@@ -1,12 +1,9 @@
 package calculator;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Calculator {
@@ -14,14 +11,23 @@ public class Calculator {
 	public static void main(String[] args) throws FileNotFoundException {
 
 		//File create and write
-		try {
+//		try {
 //			Files.writeString(Paths.get("xyz.txt"), "calculator", StandardCharsets.UTF_8);
-			FileWriter fw = new FileWriter("def.txt");
-			fw.write("hello fileWriter");
-			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			
+			//FileWriter 이용
+//			FileWriter fw = new FileWriter("def.txt");
+//			fw.write("hello fileWriter");
+//			fw.close();
+			
+			//PrintWriter 이용
+//			PrintWriter pw = new PrintWriter(new FileWriter("ghi.txt"));
+//			PrintWriter pw = new PrintWriter(System.out);
+//			pw.println("hello PrintWriter"); //System.out의 멤버함수들 사용 가능
+//			pw.print("hello System out");
+//			pw.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		
 		//File input
 //		File file = new File("abc.txt");
