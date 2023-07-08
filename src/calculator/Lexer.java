@@ -13,6 +13,12 @@ public class Lexer {
 		TokenQueue tokenQueue = new TokenQueue();
 		// lexical analysis 어휘 분석
 		// 결과 : 여러개 token 나온다.
+//		char charInput;
+//		for(int i = 0; i <= input.length() - 1; i++) {
+//			charInput = input.charAt(i); //charAt(index)
+//			System.out.println("/" + charInput + "/");
+//		}
+		
 		String[] inputArr = input.split(""); //구분자 "" 빈문자열
 		String tokenInput = "";
 		for(int i = 0; i <= inputArr.length - 1; i++) {
