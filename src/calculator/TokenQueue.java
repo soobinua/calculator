@@ -30,4 +30,10 @@ public class TokenQueue {
 			return false;
 		}
 	}
+
+	public void display() {
+		while (!isEmpty()) {
+			System.out.println("token : " + deQueue().getLiteral());
+		}
+	}
 }
