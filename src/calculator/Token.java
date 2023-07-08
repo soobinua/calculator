@@ -14,4 +14,7 @@ public class Token {
 		return literal;
 	}
 
+	public TokenType getTokenType() {
+		return tokenType;
+	}
 }

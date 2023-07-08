@@ -33,7 +33,8 @@ public class TokenQueue {
 
 	public void display() {
 		while (!isEmpty()) {
-			System.out.println("token : " + deQueue().getLiteral());
+			Token token = deQueue();
+			System.out.println("token:/" + token.getLiteral() + "/" + token.getTokenType());
 		}
 	}
 }
