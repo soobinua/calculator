@@ -28,13 +28,13 @@ public class Lexer {
 		}
 	}
 
-	public void peekCharacter() {
+	public char peekCharacter(int position) {
 		if (position > input.length() - 1) {
-			charInput = ';';
+			return ';';
 		} else {
-			charInput = input.charAt(position);
-			position++;
+			return input.charAt(position);
 		}
+
 	}
 
 	public TokenQueue lex() {
