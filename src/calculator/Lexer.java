@@ -2,10 +2,24 @@ package calculator;
 
 public class Lexer {
 
-	public String input;
+	private String input;
+	private char charInput;
+	private int index; // 현재 charInput 인덱스
+	private int position; // 다음 charInput 인덱스
 
 	public Lexer(String input) {
 		this.input = input;
+		this.position = -1;
+	}
+
+	public void next() {
+		// position++; 읽지 않았는데 position 값 증가하고 싶지 않다.
+		if (position > input.length() - 2) { // position 위치에 따라 length() - 1
+			// 마지막 인덱스 초과 읽을 수 없다.
+			throw new RuntimeException();
+		}
+		position++;
+		charInput = input.charAt(position);
 	}
 
 	public TokenQueue lex() {
