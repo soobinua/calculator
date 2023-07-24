@@ -18,35 +18,20 @@ public class Lexer {
 		}
 	}
 
-	public void readCharacter() {
+	public void readCharacter() { // 다음 값 읽는 메소드
 		if (position > input.length() - 1) {
 			charInput = ';';
 		} else {
-			charInput = input.charAt(position);
-			index = position;
-			position++;
+			charInput = input.charAt(position); // 다음 값 저장
+			index = position; // index 값을 charInput 값으로 변경
+			position++; // position 다음값으로 증가
 		}
-	}
-
-	public char peekCharacter(int position) {
-		if (position > input.length() - 1) {
-			return ';';
-		} else {
-			return input.charAt(position);
-		}
-
 	}
 
 	public TokenQueue lex() {
 		TokenQueue tokenQueue = new TokenQueue();
 		// lexical analysis 어휘 분석
 		// 결과 : 여러개 token 나온다.
-//		String[] inputArr = input.split(""); //구분자 "" 빈문자열
-//		String tokenInput = "";
-//		for(int i = 0; i <= inputArr.length - 1; i++) {
-//			tokenInput = inputArr[i];
-//		}
-
 		Token token = null;
 		while (charInput != ';') {
 			switch (charInput) {
@@ -63,10 +48,24 @@ public class Lexer {
 				token = new Token(String.valueOf(charInput), TokenType.OPERATOR);
 				break;
 			case ' ': // 빈문자열은 가능하나 빈문자 불가능. 빈문자 표현 = '\0' (이스케이프문자)
+			case '\t': // 이스케이프 문자 tab
 				token = null;
 				break; // 스페이스바 저장 X
-			default:
-				token = new Token(String.valueOf(charInput), TokenType.OPERAND);
+			// 숫자
+			case '0':
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+				// token = new Token(String.valueOf(charInput), TokenType.OPERAND);
+				token = getNumberToken();
+				tokenQueue.enQueue(token);
+				continue;
 			}
 			if (token != null) {
 				tokenQueue.enQueue(token);
@@ -75,6 +74,35 @@ public class Lexer {
 		}
 		return tokenQueue;
 
+	}
+
+	private Token getNumberToken() {
+		int start = this.index; // 시작 index
+
+		while (isNumber()) { // 숫자면 계속 다음 값 읽음
+			readCharacter();
+		}
+
+		int end = index; // 숫자 아닌 index
+		if (start == end - 1) {
+			return new Token(String.valueOf(input.charAt(start)), TokenType.OPERAND);
+		}
+
+		String str = "";
+//		for (int i = start; i < end + 1; i++) {
+//			str += input.charAt(i);
+//		}
+		str = input.substring(start, end); // [start, end) start는 포함하고 end는 포함하지 않는다는 표기법
+		return new Token(str, TokenType.OPERAND);
+	}
+
+	private boolean isNumber() {
+		// if (charInput == '0' || charInput == '2' ... '9') // 동일
+		if (charInput >= 48 && charInput <= 57) { // 아스키코드로 이용하면 코드 간편
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

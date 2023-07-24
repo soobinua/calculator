@@ -44,7 +44,6 @@ public class Calculator {
 		System.out.println("계산할 수식을 입력하세요. (종료 : q)");
 		while(true) {
 			String input = inputClass.getInput();
-			System.out.println("내용 : " + input);
 			
 			if(input.equals("q")) {
 				break;
