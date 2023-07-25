@@ -21,7 +21,7 @@ public class Lexer {
 	public void readCharacter() { // 다음 값 읽는 메소드
 		if (position > input.length() - 1) {
 			charInput = ';';
-			index = position;
+			index = position; //global state, invariant 문제
 		} else {
 			charInput = input.charAt(position); // 다음 값 저장
 			index = position; // index 값을 charInput 값으로 변경
