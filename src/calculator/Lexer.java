@@ -21,7 +21,7 @@ public class Lexer {
 	public void readCharacter() { // 다음 값 읽는 메소드
 		if (position > input.length() - 1) {
 			charInput = ';';
-			index = position; //global state, invariant 문제
+			index = position; // global state, invariant 문제
 		} else {
 			charInput = input.charAt(position); // 다음 값 저장
 			index = position; // index 값을 charInput 값으로 변경
@@ -85,10 +85,10 @@ public class Lexer {
 		}
 
 		int end = index; // 숫자 아닌 index
-		
+
 		String str = "";
 //		for (int i = start; i < end; i++) {
-//			str += input.charAt(i);
+//			str += input.charAt(i); // str = str + String.valueOf(input.charAt(i));
 //		}
 		str = input.substring(start, end); // [start, end) start는 포함하고 end는 포함하지 않는다는 표기법
 		return new Token(str, TokenType.OPERAND);
@@ -96,7 +96,20 @@ public class Lexer {
 
 	private boolean isNumber() {
 		// if (charInput == '0' || charInput == '2' ... '9') // 동일
+
+		String abc = "abc";
+		char def = 'a'; // char타입 메모리 저장 유니코드로 저장되며 유니코드는 2바이트로 저장됨
+		char efg = 65; // 값변수
+		String kkk = "가나다";
+		char[] gg = { 'a', 'b', 'c' };
+		String[] yy = { "a", "b", "c" }; // 참조변수 stack에 4바이트로 변수에 힙 주소값 저장 -> 힙 12바이트 만들어져서 4바이트당 문자열 저장하는 주소 값 저장.(32비트 컴퓨터. 64비트인 경우 24바이트)
+		String[] zz = { "a1234", "b1234", "c1234", "d1234" }; // 참조변수 stack에 4바이트로 변수에 힙 주소값 저장 -> 힙 16바이트 만들어져서 4바이트당 문자열 저장하는 주소 값 저장
+
 		if (charInput >= 48 && charInput <= 57) { // 아스키코드로 이용하면 코드 간편
+			// 2바이트 charInput과 Integer 4바이트 비교 가능한 이유
+			// promotion. 수식에서 Integer가 나오는 경우 다른 타입 Integer로 바꿔서 비교
+			// 원래 57 숫자 한바이트지만 Integer이므로 4바이트
+			// promotion. 기본 정수는 Integer 4바이트. 부동 소수점 double 8바이트로 바꿔서 비교
 			return true;
 		} else {
 			return false;
