@@ -85,12 +85,9 @@ public class Lexer {
 		}
 
 		int end = index; // 숫자 아닌 index
-		if (start == end - 1) {
-			return new Token(String.valueOf(input.charAt(start)), TokenType.OPERAND);
-		}
-
+		
 		String str = "";
-//		for (int i = start; i < end + 1; i++) {
+//		for (int i = start; i < end; i++) {
 //			str += input.charAt(i);
 //		}
 		str = input.substring(start, end); // [start, end) start는 포함하고 end는 포함하지 않는다는 표기법
