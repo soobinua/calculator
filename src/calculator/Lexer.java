@@ -36,40 +36,23 @@ public class Lexer {
 		Token token = null;
 		while (charInput != ';') {
 			skipSpaces();
-			switch (charInput) {
-			case '+' -> {
-				token = new Token(String.valueOf(charInput), TokenType.OPERATOR);
-			}
-			case '-' -> {
-				token = new Token(String.valueOf(charInput), TokenType.OPERATOR);
-			}
-			case '*' -> {
-				token = new Token(String.valueOf(charInput), TokenType.OPERATOR);
-			}
-			case '/' -> {
-				token = new Token(String.valueOf(charInput), TokenType.OPERATOR);
-			}
+			token = switch (charInput) {
+			case '+' -> new Token(String.valueOf(charInput), TokenType.OPERATOR); // 한 줄인 경우 {}와 yield 생략 가능. yield new Token...
+			case '-' -> new Token(String.valueOf(charInput), TokenType.OPERATOR);
+			case '*' -> new Token(String.valueOf(charInput), TokenType.OPERATOR);
+			case '/' -> new Token(String.valueOf(charInput), TokenType.OPERATOR);
 			// 숫자
-			case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' -> {
-				token = getNumberToken();
-				tokenQueue.enQueue(token);
-				continue;
-			}
-			case ';' -> {
-				token = new Token(String.valueOf(charInput), TokenType.EOF);
-			}
+			case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' -> getNumberToken();
+			case ';' -> new Token(String.valueOf(charInput), TokenType.EOF);
 			// 공백 구분자 외 부적합 처리
-			default -> {
-				token = new Token(String.valueOf(charInput), TokenType.ILLEGAL);
+			default -> new Token(String.valueOf(charInput), TokenType.ILLEGAL);
+			}; // expression 문장 하나로 생각하기에 ; 필수
+			tokenQueue.enQueue(token);
+			if (token.getTokenType() != TokenType.OPERAND) {
+				readCharacter();
 			}
-			}
-			if (token != null) {
-				tokenQueue.enQueue(token);
-			}
-			readCharacter();
 		}
 		return tokenQueue;
-
 	}
 
 	private void skipSpaces() {
