@@ -36,7 +36,7 @@ public class Lexer {
 		Token token = null;
 		while (charInput != ';') {
 			skipSpaces();
-			token = switch (charInput) {
+			token = switch (charInput) { //switch expression. global state, invariant문제로 switch식 사용. invariant 불변속성(변하지 않는 속성이 아니라 변하는 불변이라는 속성값으로 모두 생각하고 사용하는것) 이로 인해 묹제 발생
 			case '+' -> new Token(String.valueOf(charInput), TokenType.OPERATOR); // 한 줄인 경우 {}와 yield 생략 가능. yield new Token...
 			case '-' -> new Token(String.valueOf(charInput), TokenType.OPERATOR);
 			case '*' -> new Token(String.valueOf(charInput), TokenType.OPERATOR);
@@ -45,7 +45,7 @@ public class Lexer {
 			case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' -> getNumberToken();
 			case ';' -> new Token(String.valueOf(charInput), TokenType.EOF);
 			// 공백 구분자 외 부적합 처리
-			default -> new Token(String.valueOf(charInput), TokenType.ILLEGAL);
+			default -> new Token(String.valueOf(charInput), TokenType.ILLEGAL); //default는 언제든지 invariant 될 수 있으므로 사용 지양해야 한다.
 			}; // expression 문장 하나로 생각하기에 ; 필수
 			tokenQueue.enQueue(token);
 			if (token.getTokenType() != TokenType.OPERAND) {
