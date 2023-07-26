@@ -35,6 +35,7 @@ public class Lexer {
 		// 결과 : 여러개 token 나온다.
 		Token token = null;
 		while (charInput != ';') {
+			skipSpaces();
 			switch (charInput) {
 			case '+':
 				token = new Token(String.valueOf(charInput), TokenType.OPERATOR);
@@ -48,10 +49,6 @@ public class Lexer {
 			case '/':
 				token = new Token(String.valueOf(charInput), TokenType.OPERATOR);
 				break;
-			case ' ': // 빈문자열은 가능하나 빈문자 불가능. 빈문자 표현 = '\0' (이스케이프문자)
-			case '\t': // 이스케이프 문자 tab
-				token = null;
-				break; // 스페이스바 저장 X
 			// 숫자
 			case '0':
 			case '1':
@@ -63,10 +60,14 @@ public class Lexer {
 			case '7':
 			case '8':
 			case '9':
-				// token = new Token(String.valueOf(charInput), TokenType.OPERAND);
 				token = getNumberToken();
 				tokenQueue.enQueue(token);
 				continue;
+			case ';':
+				token = new Token(String.valueOf(charInput), TokenType.EOF);
+				break;
+			default: //공백 구분자 외 부적합 처리
+				token = new Token(String.valueOf(charInput),TokenType.ILLEGAL);
 			}
 			if (token != null) {
 				tokenQueue.enQueue(token);
@@ -75,6 +76,21 @@ public class Lexer {
 		}
 		return tokenQueue;
 
+	}
+
+	private void skipSpaces() {
+		if(isSpace()) {
+			while(isSpace()) {
+				readCharacter();
+			}
+		}
+	}
+
+	private boolean isSpace() {
+		if(charInput == ' ' || charInput == '\t') {
+			return true;
+		}
+		return false;
 	}
 
 	private Token getNumberToken() {
@@ -105,7 +121,7 @@ public class Lexer {
 		String[] yy = { "a", "b", "c" }; // 참조변수 stack에 4바이트로 변수에 힙 주소값 저장 -> 힙 12바이트 만들어져서 4바이트당 문자열 저장하는 주소 값 저장.(32비트 컴퓨터. 64비트인 경우 24바이트)
 		String[] zz = { "a1234", "b1234", "c1234", "d1234" }; // 참조변수 stack에 4바이트로 변수에 힙 주소값 저장 -> 힙 16바이트 만들어져서 4바이트당 문자열 저장하는 주소 값 저장
 
-		if (charInput >= 48 && charInput <= 57) { // 아스키코드로 이용하면 코드 간편
+		if (charInput >= '0' && charInput <= '9') { // 아스키코드로 이용하면 코드 간편
 			// 2바이트 charInput과 Integer 4바이트 비교 가능한 이유
 			// promotion. 수식에서 Integer가 나오는 경우 다른 타입 Integer로 바꿔서 비교
 			// 원래 57 숫자 한바이트지만 Integer이므로 4바이트
