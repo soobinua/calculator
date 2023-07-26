@@ -13,6 +13,8 @@ class CalculatorTest {
 		for (int i = 0; i < abc.length; i++) {
 			System.out.println(abc[i]);
 		}
+		
+		//TODO 1~10까지 더하기. 기본, while문 사용 안하기
 	}
 
 }
