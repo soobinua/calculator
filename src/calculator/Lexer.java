@@ -37,37 +37,31 @@ public class Lexer {
 		while (charInput != ';') {
 			skipSpaces();
 			switch (charInput) {
-			case '+':
+			case '+' -> {
 				token = new Token(String.valueOf(charInput), TokenType.OPERATOR);
-				break;
-			case '-':
+			}
+			case '-' -> {
 				token = new Token(String.valueOf(charInput), TokenType.OPERATOR);
-				break;
-			case '*':
+			}
+			case '*' -> {
 				token = new Token(String.valueOf(charInput), TokenType.OPERATOR);
-				break;
-			case '/':
+			}
+			case '/' -> {
 				token = new Token(String.valueOf(charInput), TokenType.OPERATOR);
-				break;
+			}
 			// 숫자
-			case '0':
-			case '1':
-			case '2':
-			case '3':
-			case '4':
-			case '5':
-			case '6':
-			case '7':
-			case '8':
-			case '9':
+			case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' -> {
 				token = getNumberToken();
 				tokenQueue.enQueue(token);
 				continue;
-			case ';':
+			}
+			case ';' -> {
 				token = new Token(String.valueOf(charInput), TokenType.EOF);
-				break;
-			default: //공백 구분자 외 부적합 처리
-				token = new Token(String.valueOf(charInput),TokenType.ILLEGAL);
+			}
+			// 공백 구분자 외 부적합 처리
+			default -> {
+				token = new Token(String.valueOf(charInput), TokenType.ILLEGAL);
+			}
 			}
 			if (token != null) {
 				tokenQueue.enQueue(token);
@@ -79,15 +73,15 @@ public class Lexer {
 	}
 
 	private void skipSpaces() {
-		if(isSpace()) {
-			while(isSpace()) {
+		if (isSpace()) {
+			while (isSpace()) {
 				readCharacter();
 			}
 		}
 	}
 
 	private boolean isSpace() {
-		if(charInput == ' ' || charInput == '\t') {
+		if (charInput == ' ' || charInput == '\t') {
 			return true;
 		}
 		return false;
